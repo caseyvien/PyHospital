@@ -27,3 +27,7 @@ class Hospital:
     def admitPatient(self, patient):
         if patient in self.patient_list:
             self.admit_list.append(patient)
+
+    def addRoom(self, room):
+        self.room_list.append(room)
+        print("Room",room.r_type,"added")

@@ -2,8 +2,8 @@ from .room import Room
 
 class Gp(Room):
 
-    def __init__(self):
-        Room("GP", {"floor":1, "room": 1})
+    def __init__(self, floor, room):
+        Room("GP", {"floor":floor, "room": room})
         self.room_doctor = []
         self.room_patient = []
         self.patient_queue = []

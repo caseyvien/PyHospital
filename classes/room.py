@@ -1,6 +1,6 @@
 class Room:
 
-    def __init__(self, r_type: object, r_location: object) -> object:
+    def __init__(self, r_type: object, r_location: object)
         self.r_type = r_type
         self.r_location = r_location
         self.is_occupied = False

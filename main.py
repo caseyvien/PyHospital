@@ -1,6 +1,7 @@
 from classes.hospital import Hospital
 from classes.patient import Patient
 
+
 new_hospital = Hospital("KN Hospital", 50)
 
 patient1 = Patient("John Doe",["diabetes","fever"])
@@ -14,4 +15,6 @@ new_hospital.admitPatient(patient1)
 
 print("\n\n")
 new_hospital.display_hospital();
+
+
 
