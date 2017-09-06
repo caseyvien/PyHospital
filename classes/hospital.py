@@ -6,6 +6,7 @@ class Hospital:
         self.patient_list = []
         self.room_list = []
         self.admit_list = []
+        self.doctor_list = []
 
     def display_hospital(self):
         print("Hospital Name:", self.h_name)
@@ -19,6 +20,9 @@ class Hospital:
         print("List of admissions")
         for patient in self.admit_list:
             print(patient.p_name)
+        print("List of doctors")
+        for doctor in self.doctor_list:
+            print(doctor.p_name)
 
     def addPatient(self, patient):
         self.patient_list.append(patient)
@@ -31,3 +35,7 @@ class Hospital:
     def addRoom(self, room):
         self.room_list.append(room)
         print("Room",room.r_type,"added")
+
+    def addDoctor(self, doctor):
+        self.doctor_list.append(doctor)
+        print("Doctor",doctor.p_name, "added")
