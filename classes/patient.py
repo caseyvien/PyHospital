@@ -7,6 +7,7 @@ class Patient(Person):
         self.sicknesses = sicknesses
         self.inpatient = False
         self.is_cured = False
+        self.is_queued = False
 
     def display_patient(self):
         print("Patient name:", self.p_name)
@@ -14,3 +15,4 @@ class Patient(Person):
         print("Sicknesses:", self.sicknesses)
         print("Is an in-patient", self.inpatient)
         print("Is cured?", self.is_cured)
+        print("Is queued?", self.is_queued)
