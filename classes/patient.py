@@ -8,6 +8,7 @@ class Patient(Person):
         self.inpatient = False
         self.is_cured = False
         self.is_queued = False
+        self.room_assignment = []
 
     def display_patient(self):
         print("Patient name:", self.p_name)
@@ -16,3 +17,13 @@ class Patient(Person):
         print("Is an in-patient", self.inpatient)
         print("Is cured?", self.is_cured)
         print("Is queued?", self.is_queued)
+
+    def assign_room(self, room):
+        #self.room_assignment.clear()
+        self.leave_room(room)
+        self.room_assignment.append(room)
+        self.is_queued = True
+
+    def leave_room(self, room):
+        self.room_assignment.clear()
+        self.is_queued = False

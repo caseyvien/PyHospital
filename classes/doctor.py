@@ -12,7 +12,11 @@ class Doctor(Person):
         print("Specialties:", self.specialties)
 
     def assign_room(self, room):
-        self.room_assignment.clear()
+        #self.room_assignment.clear()
+        self.leave_room(room)
         self.room_assignment.append(room)
+
+    def leave_room(self, room):
+        self.room_assignment.clear()
 
 

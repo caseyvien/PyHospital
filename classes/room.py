@@ -15,7 +15,7 @@ class Room:
         else:
             print("Is room occupied: Yes, patient list below")
             for patient in self.patient_list:
-                print("Patient#", patient_list.index(patient)," ", patient)
+                print("Patient#", self.patient_list.index(patient)," ", patient.p_name)
         if not self.doctor_list:
             print("Does the room have a doctor: No")
         else:
@@ -32,4 +32,11 @@ class Room:
         self.patient_list.append(patient)
         print("Patient ", patient.p_name, "added to", self.r_type)
         patient.is_queued = True
+
+    def remove_doctor(self, doctor):
+        self.doctor_list.remove(doctor)
+        print("Trace - this room's doctor", self.doctor_list)
+
+    def remove_patient(self, patient):
+        self.patient_list.remove(patient)
 

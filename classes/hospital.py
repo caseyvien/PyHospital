@@ -11,7 +11,10 @@ class Hospital:
         self.admit_list = []
         self.doctor_list = []
         self.available_doctor_list = []
+        self.available_doctor_list = []
         self.booked_doctor_list = []
+        self.busy_patient_list = []
+        self.idle_patient_list = []
 
     def display_hospital(self):
         print("Hospital Name:", self.h_name)
@@ -37,6 +40,7 @@ class Hospital:
 
     def addPatient(self, patient):
         self.patient_list.append(patient)
+        self.idle_patient_list.append(patient)
         print("Patient",patient.p_name,"added")
 
     def admitPatient(self, patient):
@@ -48,17 +52,42 @@ class Hospital:
         print("Room",room.r_type," added")
 
     def addDoctor(self, doctor):
-        self.doctor_list.append(doctor)
-        print("Doctor",doctor.p_name, "added")
+        if self.doctor_list.__len__() <= self.h_capacity:
+            self.doctor_list.append(doctor)
+            self.available_doctor_list.append(doctor)
+            print("Doctor",doctor.p_name, "added")
+        else:
+            print("Hospital is full. Doctor", doctor.p_name, "not added")
 
     def assignDoctor(self, doctor, room):
         if doctor in self.doctor_list and room in self.room_list:
             new_room = self.room_list[self.room_list.index(room)]
             new_doctor = self.doctor_list[self.doctor_list.index(doctor)]
-            new_doctor.assignRoom(new_room)
+            new_doctor.assign_room(new_room)
             new_room.add_doctor(new_doctor)
+            self.booked_doctor_list.append(doctor)
+            self.available_doctor_list.remove(doctor)
 
-    def removeDoctor
+    def assignPatient(self, patient, room):
+        if patient in self.patient_list and room in self.room_list:
+            new_room = self.room_list[self.room_list.index(room)]
+            new_patient = self.patient_list[self.patient_list.index(patient)]
+            new_patient.assign_room(new_room)
+            new_room.add_patient(new_patient)
+            self.busy_patient_list.append(patient)
+            self.idle_patient_list.remove(patient)
+
+    def removeDoctor(self, doctor, room):
+        doctor.leave_room(room)
+        room.remove_doctor(doctor)
+        self.available_doctor_list.append(doctor)
+        self.booked_doctor_list.remove(doctor)
+
+    def removePatient(self, patient, room):
+        patient.leave_room(room)
+        room.remove_doctor(patient)
+        self.idle_patient_list.append(patient)
+        self.busy_patient_list.remove(patient)
 
     def displayRoom(self, room):
         new_room = self.room_list[self.room_list.index(room)]

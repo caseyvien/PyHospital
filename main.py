@@ -3,6 +3,7 @@ from classes.patient import Patient
 from classes.doctor import Doctor
 from classes.room import Room
 from classes.gp import Gp
+from classes.ward import Ward
 import random
 
 
@@ -35,6 +36,7 @@ while run:
           "[4]Assign Doctor to Room \n"
           "[5]Assign Patient to Room \n"
           "[6]Display Room \n"
+          "[7]Remove doctor from Room \n"
           "[9]Display Hospital \n"
           "[0]Quit")
     user_command = input("Enter Choice: ")
@@ -49,11 +51,15 @@ while run:
         new_hospital.addDoctor(new_doctor)
         new_doctor.display_doctor()
     elif user_command == "3":
-        new_roomtype = input("Enter room type: [1]GP [2]Cancel")
+        new_roomtype = input("Enter room type: [1]GP [2]Ward [0]Cancel")
         if new_roomtype == "1":
-            new_gp = Gp(1, new_hospital.room_list.__len__(), 1)
-            new_hospital.addRoom(new_gp)
-            new_gp.display_room()
+            new_room = Gp(1, new_hospital.room_list.__len__(), 1)
+        elif new_roomtype == "2":
+            new_room = Ward(1, new_hospital.room_list.__len__(), 1)
+        elif new_roomtype == "0":
+            continue
+        new_hospital.addRoom(new_room)
+        new_room.display_room()
     elif user_command == "4":
         if new_hospital.displayRoomList():
             add_room_command = input("Select room number: ")
@@ -62,16 +68,37 @@ while run:
             for doc_num, doctor in enumerate(new_hospital.doctor_list):
                 print(doc_num, doctor.p_name)
             add_doctor_command = input("Select doctor number: ")
-            if int(add_doctor_command) <= new_hospital.room_list.__len__():
+            if int(add_doctor_command) <= new_hospital.doctor_list.__len__():
                 selected_doctor = new_hospital.doctor_list[int(add_doctor_command)]
                 new_hospital.assignDoctor(selected_doctor, selected_room)
         else:
             print("No rooms created")
+    elif user_command == "5":
+        if new_hospital.displayRoomList():
+            add_room_command = input("Select room number:")
+            if int(add_room_command) <= new_hospital.room_list.__len__():
+                selected_room = new_hospital.room_list[int(add_room_command)]
+            for patient_num, patient in enumerate(new_hospital.patient_list):
+                print(patient_num, patient.p_name)
+            add_patient_command = input("Select patient number: ")
+            if int(add_patient_command) <= new_hospital.patient_list.__len__():
+                selected_patient = new_hospital.patient_list[int(add_patient_command)]
+                new_hospital.assignPatient(selected_patient, selected_room)
     elif user_command == "6":
         if new_hospital.displayRoomList():
             add_room_command = input("Select room number: ")
             selected_room = new_hospital.room_list[int(add_room_command)]
             new_hospital.displayRoom(selected_room)
+        else:
+            print("No rooms created")
+    elif user_command == "7":
+        if new_hospital.displayRoomList():
+            del_doc_command = input("Select room number: ")
+            selected_room = new_hospital.room_list[int(del_doc_command)]
+            for doc_num_doctor, doctor in enumerate(selected_room.doctor_list):
+                print(doc_num , doctor.p_name)
+            selected_doctor = selected_room.doctor_list[int(input("Select doctor number:"))]
+            new_hospital.removeDoctor(selected_doctor, selected_room)
         else:
             print("No rooms created")
     elif user_command == "9":

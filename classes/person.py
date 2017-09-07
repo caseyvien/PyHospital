@@ -4,3 +4,5 @@ class Person:
         self.p_name = p_name
         self.p_type = p_type
         self.is_busy = False
+
+
